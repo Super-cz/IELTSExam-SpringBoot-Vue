@@ -1,38 +1,69 @@
-# 在线考试系统
+# 本科毕业设计-环球雅思教育考试管理系统设计与实现
 
 * ## 系统介绍
 
      该项目是一个前后端分离，后端使用 SpringBoot，前端使用 VUE 和 Element-UI 组件库配合完成开发。
 
-* ## 鸣谢作者“YXJ2018”给予的创作灵感
-* 友情链接：https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam
-
-
+* ## 启动说明
+  ### 安装建议
+  
+  > 建议使用`yarn`来安装项目依赖，首先安装yarn，然后设置yarn源为淘宝镜像
+  
+  ``` bash
+  # 安装yarn
+  npm install yarn -g
+  
+  # 查看是否安装成功
+  yarn -v
+  
+  # 设置yarn源为淘宝镜像源
+  yarn config set registry https://registry.npm.taobao.org
+  
+  # 安装依赖
+  yarn install or npm install
+  
+  # 启动项目
+  yarn dev or npm run dev
+  
+  # 打包构建
+  yarn build or npm run build
+ 
 * ## 页面截图
-  ![登录](https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam/blob/master/img/%E7%99%BB%E5%BD%95.png?raw=true)
+  ![登录注册](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E7%99%BB%E9%99%86%E6%B3%A8%E5%86%8C.png)
 
-  <center>登录</center>
+  <div style="text-align: center;">登录注册</div>
 
-![试卷列表](https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam/blob/master/img/%E8%AF%95%E5%8D%B7%E5%88%97%E8%A1%A8.png?raw=true)
+  ![试卷列表](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E8%AF%95%E5%8D%B7%E5%88%97%E8%A1%A8.png)
 
-<center>试卷列表</center>
+  <div style="text-align: center;">试卷列表</div>
 
-![答题模块](https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam/blob/master/img/%E7%AD%94%E9%A2%98%E6%A8%A1%E5%9D%97.png?raw=true)
+  ![考试详情](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E8%80%83%E8%AF%95%E8%AF%A6%E6%83%85.png)
 
-<center>答题模块</center>
+  <div style="text-align: center;">考试详情</div>
 
-![练习模式](https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam/blob/master/img/%E7%BB%83%E4%B9%A0%E6%A8%A1%E5%BC%8F.png?raw=true)
+  ![在线作答](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E5%9C%A8%E7%BA%BF%E4%BD%9C%E7%AD%94.png)
 
-<center>练习模式</center>
+  <div style="text-align: center;">在线作答</div>
 
-![留言模块](https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam/blob/master/img/%E7%95%99%E8%A8%80%E6%A8%A1%E5%9D%97.png?raw=true)
+  ![分数展示](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E5%88%86%E6%95%B0%E5%B1%95%E7%A4%BA.png)
 
-<center>留言模块<center/>
+  <div style="text-align: center;">分数展示</div>
 
-![后台管理](https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam/blob/master/img/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86.png?raw=true)
+  ![留言模块](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E7%95%99%E8%A8%80%E6%9D%BF%E5%9D%97.png)
+  
+  <div style="text-align: center;">留言板块</div>
+  
+  ![后台管理](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86.png)
+  
+  <div style="text-align: center;">后台管理</div>
+  
+  ![考生历史成绩折线](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E8%80%83%E7%94%9F%E5%8E%86%E5%8F%B2%E6%88%90%E7%BB%A9%E6%8A%98%E7%BA%BF.png)
+  
+  <div style="text-align: center;">考生历史成绩折线</div><br>
 
-<center>后台管理</center>
+  ![考试成绩分段饼图](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E8%80%83%E8%AF%95%E6%88%90%E7%BB%A9%E5%88%86%E6%AE%B5%E9%A5%BC%E5%9B%BE.png)
 
-![学生成绩](https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam/blob/master/img/%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E6%8A%98%E7%BA%BF%E5%9B%BE.png?raw=true)
+  <div style="text-align: center;">考试成绩分段饼图</div><br>
 
-<center>学生成绩</center>
+* 鸣谢作者“YXJ2018”给予的创作灵感
+* 友情链接：https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam
