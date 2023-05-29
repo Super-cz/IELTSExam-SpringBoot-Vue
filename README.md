@@ -31,7 +31,7 @@
 * ## 页面截图
   ![登录注册](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E7%99%BB%E9%99%86%E6%B3%A8%E5%86%8C.png)
 
-  <div style="text-align: center;">登录注册</div>
+  <div style="text-align: center;">登录注册</div> 
 
   ![试卷列表](https://github.com/Super-cz/IELTSExam-SpringBoot-Vue/blob/master/imgBym/%E8%AF%95%E5%8D%B7%E5%88%97%E8%A1%A8.png)
 
