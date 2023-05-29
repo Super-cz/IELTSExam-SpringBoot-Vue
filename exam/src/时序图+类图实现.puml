@@ -1,0 +1,313 @@
+'https://plantuml.com/zh/sequence-diagram 调背景颜色
+'生成方法：（大前提告诉一句：注意这个系统的角色（考生、教师、系统管理员），再设计顺序图）ChatGPT调教：“接下来我们来写“系统管理”的顺序图设计，首先用一段文字详细描述顺序图流程（文字描述不需要分成1234点，只需要写一段就好了），在画出这个顺序图，注意顺序图的代码中加入类似“actor User #white participant System #white participant Database #white”的代码，把每一个参与者的背景调成白色”
+
+'用户登录注册管理
+@startuml
+'actor User #white
+'participant System #white
+'participant Database #white
+'
+'User -> System: 请求注册
+'System -> Database: 查询用户名是否存在
+'alt 用户名不存在
+'    System -> Database: 插入用户数据
+'    System -> User: 注册成功
+'else 用户名已存在
+'    System -> User: 注册失败
+'end
+'
+'User -> System: 请求登录
+'System -> Database: 查询用户名和密码是否匹配
+'alt 用户名和密码匹配
+'    System -> User: 登录成功
+'else 用户名和密码不匹配
+'    System -> User: 登录失败
+'end
+@enduml
+
+'用户管理
+@startuml
+'actor SystemAdmin #white
+'participant System #white
+'participant Database #white
+'
+'SystemAdmin -> System: 登录
+'System -> Database: 验证登录信息
+'Database --> System: 返回验证结果
+'
+'SystemAdmin -> System: 请求用户列表
+'System -> Database: 查询用户列表
+'Database --> System: 返回用户列表
+'System --> SystemAdmin: 显示用户列表
+'
+'SystemAdmin -> System: 请求添加用户
+'System -> Database: 添加用户
+'Database --> System: 返回添加结果
+'System --> SystemAdmin: 显示添加结果
+'
+'SystemAdmin -> System: 请求修改用户信息
+'System -> Database: 更新用户信息
+'Database --> System: 返回更新结果
+'System --> SystemAdmin: 显示更新结果
+'
+'SystemAdmin -> System: 请求删除用户
+'System -> Database: 删除用户
+'Database --> System: 返回删除结果
+'System --> SystemAdmin: 显示删除结果
+@enduml
+
+'题库管理
+@startuml
+'actor Administrator #white
+'participant System #white
+'participant Database #white
+'
+'Administrator -> System: 登录系统
+'activate System
+'System -> System: 显示主界面
+'Administrator -> System: 进入题库管理模块
+'System -> Database: 查询题库信息
+'activate Database
+'Database -> System: 返回题库信息
+'deactivate Database
+'System -> Administrator: 显示题库信息
+'Administrator -> System: 选择添加/编辑/删除题目
+'System -> Administrator: 显示相应的操作界面
+'Administrator -> System: 输入题目信息/选择题目
+'System -> System: 保存题目信息/修改信息/删除信息
+'System -> Administrator: 提示操作是否成功
+'Administrator -> System: 选择分类/搜索题目
+'System -> System: 保存分类/搜索结果
+'System -> Administrator: 显示分类/搜索结果
+'Administrator -> System: 保存更改并退出
+'System -> System: 保存更改
+'System -> System: 退出题库管理模块
+'deactivate System
+@enduml
+
+'在线考试管理
+@startuml
+'actor 教师 #white
+'actor 考生 #white
+'participant 系统管理员 #white
+'participant 系统 #white
+'database 数据库 #white
+'
+'教师 -> 系统: 创建考试
+'系统 -> 数据库: 存储考试信息
+'教师 -> 系统: 安排考试
+'系统 -> 数据库: 存储考试分配信息
+'考生 -> 系统: 进入考试界面
+'系统 -> 考生: 显示考试内容
+'考生 -> 系统: 提交考试
+'系统 -> 数据库: 存储考试结果
+'教师 -> 系统: 进入成绩管理
+'系统 -> 数据库: 查询考试结果
+'系统 -> 教师: 显示考试结果
+'教师 -> 系统: 进行阅卷
+'系统 -> 数据库: 存储阅卷结果
+'教师 -> 系统: 进入成绩发布
+'系统 -> 数据库: 查询考试成绩
+'系统 -> 考生: 显示考试成绩
+@enduml
+
+
+'错题管理
+@startuml
+'actor User #white
+'participant System #white
+'participant Database #white
+'
+'User -> System: 选择“查看错题”
+'activate System
+'System -> System: 判断用户角色是否有权限
+'alt 用户角色有权限
+'System -> Database: 查询用户错题
+'Database --> System: 返回用户错题列表
+'System -> User: 显示用户错题列表
+'else 用户角色无权限
+'System -> User: 提示“无权限查看”
+'end
+'deactivate System
+'
+'User -> System: 选择“查看所有考生的错题”
+'activate System
+'System -> System: 判断用户角色是否有权限
+'alt 用户角色有权限
+'System -> Database: 查询考生列表
+'Database --> System: 返回考生列表
+'System -> User: 显示考生列表
+'User -> System: 选择一个考生
+'System -> Database: 查询该考生错题的试题列表
+'Database --> System: 返回该考生错题的试题列表
+'System -> User: 显示该考生错题的试题列表
+'User -> System: 选择一个试题
+'System -> Database: 查询该考生对应试题的错误答案和正确答案
+'Database --> System: 返回该考生对应试题的错误答案和正确答案
+'System -> User: 显示该考生对应试题的错误答案和正确答案
+'else 用户角色无权限
+'System -> User: 提示“无权限查看”
+'end
+'deactivate System
+@enduml
+
+
+'评分管理
+@startuml
+'actor 教师 #white
+'actor 学生 #white
+'participant 系统管理员 #white
+'participant 系统 #white
+'participant 数据库 #white
+'
+'教师 -> 系统: 登录
+'系统 -> 数据库: 获取考试信息
+'系统 -> 教师: 显示考试信息
+'教师 -> 系统: 选择学生答案
+'系统 -> 数据库: 获取学生答案
+'系统 -> 教师: 显示学生答案
+'教师 -> 系统: 在线评分
+'教师 -> 系统: 下载答案
+'教师 -> 系统: 上传评分结果
+'系统 -> 数据库: 存储评分结果
+'系统 -> 学生: 显示成绩、评语和建议
+@enduml
+
+'统计分析管理
+@startuml
+'actor 考生 #white
+'actor 教师 #white
+'actor 系统管理员 #white
+'participant "系统" as Sys #white
+'database "数据库" as DB #white
+'
+'考生 -> Sys: 登录系统
+'考生 -> Sys: 选择查看成绩功能
+'Sys -> DB: 查询考生成绩
+'DB -> Sys: 返回考生成绩
+'Sys -> 考生: 显示考生成绩
+'考生 -> Sys: 选择查看详细试题得分情况
+'Sys -> DB: 查询考生试题得分
+'DB -> Sys: 返回考生试题得分
+'Sys -> 考生: 显示考生试题得分
+'
+'教师 -> Sys: 登录系统
+'教师 -> Sys: 选择查看成绩统计功能
+'Sys -> DB: 查询考试成绩统计信息
+'DB -> Sys: 返回考试成绩统计信息
+'Sys -> 教师: 显示考试成绩统计信息
+'教师 -> Sys: 选择查看某个考试详细成绩信息
+'Sys -> DB: 查询考试详细成绩信息
+'DB -> Sys: 返回考试详细成绩信息
+'Sys -> 教师: 显示考试详细成绩信息
+'
+'系统管理员 -> Sys: 登录系统
+'系统管理员 -> Sys: 选择查看成绩统计功能
+'Sys -> DB: 查询考试成绩统计信息
+'DB -> Sys: 返回考试成绩统计信息
+'Sys -> 系统管理员: 显示考试成绩统计信息
+'系统管理员 -> Sys: 选择查看某个考试详细成绩信息
+'Sys -> DB: 查询考试详细成绩信息
+'DB -> Sys: 返回考试详细成绩信息
+'Sys -> 系统管理员: 显示考试详细成绩信息
+@enduml
+
+'学习资料管理
+@startuml
+actor 教师 #white
+actor 考生 #white
+actor 系统管理员 #white
+participant 系统 #white
+database 数据库 #white
+
+教师 -> 系统: 登录
+系统 -> 数据库: 验证身份
+系统 -> 教师: 进入教师后台
+教师 -> 系统: 上传资料
+系统 -> 数据库: 存储资料
+系统 -> 教师: 上传成功
+
+考生 -> 系统: 登录
+系统 -> 数据库: 验证身份
+系统 -> 考生: 进入考生后台
+考生 -> 系统: 下载资料
+系统 -> 数据库: 检索资料
+系统 -> 考生: 下载资料
+
+系统管理员 -> 系统: 登录
+系统 -> 数据库: 验证身份
+系统管理员 -> 系统: 进入系统管理员后台
+系统管理员 -> 数据库: 管理员操作
+系统 -> 系统管理员: 操作成功
+@enduml
+
+'学生讨论管理
+@startuml
+'actor Student #white
+'participant System #white
+'participant Database #white
+'
+'Student -> System: 选择讨论区
+'System -> Database: 查询话题列表
+'System -> Student: 返回话题列表
+'Student -> System: 选择话题
+'System -> Database: 查询帖子列表
+'System -> Student: 返回帖子列表
+'Student -> System: 选择帖子
+'System -> Database: 查询帖子详情
+'System -> Student: 返回帖子详情
+'Student -> System: 回复帖子
+'System -> Database: 记录回复内容
+'System -> System: 发送消息通知
+'System -> Student: 返回回复成功信息
+'Student -> System: 回复回复
+'System -> Database: 记录回复回复内容
+'System -> System: 发送消息通知
+'System -> Student: 返回回复回复成功信息
+'Student -> System: 新建帖子
+'System -> Database: 记录帖子内容
+'System -> Student: 返回新建帖子成功信息
+@enduml
+
+'系统管理
+@startuml
+'actor 系统管理员 #white
+'participant "系统登录界面" as UI #white
+'participant "身份验证模块" as Auth #white
+'participant "管理员主页" as Main #white
+'participant "管理模块" as Module #white
+'participant "日志记录模块" as Log #white
+'
+'== 登录 ==
+'系统管理员 -> UI: 输入登录信息
+'UI -> Auth: 验证身份信息
+'Auth -> UI: 返回验证结果
+'UI -> 系统管理员: 显示登录结果
+'
+'== 管理操作 ==
+'系统管理员 -> Main: 进入管理员主页
+'系统管理员 -> Main: 选择要管理的模块
+'Main -> Module: 发送请求
+'Module -> Auth: 验证管理员权限
+'Auth -> Module: 返回授权结果
+'Module -> Module: 处理请求
+'Module -> Main: 返回操作结果
+'Main -> 系统管理员: 显示操作结果
+'
+'== 查看日志 ==
+'系统管理员 -> Main: 进入管理员主页
+'系统管理员 -> Main: 进入日志记录模块
+'Main -> Log: 发送请求
+'Log -> Auth: 验证管理员权限
+'Auth -> Log: 返回授权结果
+'Log -> Log: 处理请求
+'Log -> Main: 返回操作结果
+'Main -> 系统管理员: 显示操作结果
+@enduml
+
+'类图生成方法：（配置见Diagrams：https://jingyan.baidu.com/article/ca41422f1c7f615faf99ed70.html）
+'接着右键整个“com.exam”包，别忘了点上功能栏的“回形针”小图标（即Show Dependencies），然后就可以看到整个项目的类图以及各自的依赖（特别的特别杂）
+'所以，我把需要的类单独拖出来，比如说Login、LoginController、LoginMapper、LoginService和LoginServiceImpl，接着把其他的类删掉，再点掉“回形针”小图标，再打开即可，清晰明了。
+'优化：右键页面-Layout-Orthogonal-Hierarchic Groups，即可自动调整类图布局（https://baijiahao.baidu.com/s?id=1728907866202978067&wfr=spider&for=pc）
+'优化：右键页面-Content-Add Class to Diagram...可直接添加类图，不需要全部导入再删除了（https://www.cnblogs.com/lbys/p/14391232.html）
+'优化：右键页面-Copy Selection to Clipboard-再鼠标框选，即可复制到剪切板

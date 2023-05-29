@@ -1,0 +1,113 @@
+'by-chatGPT
+
+@startuml
+!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define Entity(name,desc) class name as "desc" << (E,#FFFF99) >>
+!define Weak_Entity(name,desc) class name as "desc" << (EW,#FFA07A) >>
+!define Attribute(name,desc) name : desc
+!define Primary(key) key <<PK>>
+!define Foreign(key) key <<FK>>
+
+!define Nul(value) {value}
+
+title Online Exam System ER Diagram
+
+Entity(KaoSheng, "考生") {
+    Primary(KSID)
+    Attribute(KSName, "姓名")
+    Attribute(KSPhone, "联系方式")
+}
+
+Entity(Teacher, "教师") {
+    Primary(TID)
+    Attribute(TName, "姓名")
+    Attribute(TPhone, "联系方式")
+}
+
+Entity(SysAdmin, "系统管理员") {
+    Primary(SAID)
+    Attribute(SAName, "姓名")
+    Attribute(SAPhone, "联系方式")
+}
+
+Entity(Exam, "考试") {
+    Primary(ExamID)
+    Attribute(ExamTitle, "考试名称")
+    Attribute(StartTime, "开始时间")
+    Attribute(EndTime, "结束时间")
+    Attribute(Duration, "时长")
+    Attribute(ExamState, "考试状态")
+    Foreign(KSID) references KaoSheng(KSID)
+    Foreign(TID) references Teacher(TID)
+}
+
+Entity(Paper, "试卷") {
+    Primary(PaperID)
+    Attribute(PaperTitle, "试卷名称")
+    Attribute(PaperScore, "总分")
+    Attribute(PaperState, "试卷状态")
+    Foreign(ExamID) references Exam(ExamID)
+}
+
+Entity(FillQuestion, "填空题") {
+    Primary(FillID)
+    Attribute(FillContent, "题目")
+    Attribute(FillAnswer, "答案")
+    Attribute(FillScore, "分值")
+    Foreign(PaperID) references Paper(PaperID)
+}
+
+Entity(ChoiceQuestion, "选择题") {
+    Primary(ChoiceID)
+    Attribute(ChoiceContent, "题目")
+    Attribute(ChoiceOption1, "选项1")
+    Attribute(ChoiceOption2, "选项2")
+    Attribute(ChoiceOption3, "选项3")
+    Attribute(ChoiceOption4, "选项4")
+    Attribute(ChoiceAnswer, "答案")
+    Attribute(ChoiceScore, "分值")
+    Foreign(PaperID) references Paper(PaperID)
+}
+
+Entity(JudgeQuestion, "判断题") {
+    Primary(JudgeID)
+    Attribute(JudgeContent, "题目")
+    Attribute(JudgeAnswer, "答案")
+    Attribute(JudgeScore, "分值")
+    Foreign(PaperID) references Paper(PaperID)
+}
+
+Entity(Score, "成绩单") {
+    Primary(ScoreID)
+    Attribute(ScoreValue, "成绩")
+    Attribute(ScoreState, "成绩状态")
+    Foreign(KSID) references KaoSheng(KSID)
+    Foreign(ExamID) references Exam(ExamID)
+}
+
+Entity(Discussion, "讨论帖") {
+    Primary(DiscussionID)
+    Attribute(DiscussionTitle, "帖子标题")
+    Attribute(DiscussionContent, "帖子内容")
+    Attribute(DiscussionTime, "发布时间")
+    Foreign(KSID) references KaoSheng(KSID)
+}
+
+Entity(Reply, "回复") {
+    Primary(ReplyID)
+    Attribute(ReplyContent, "回复内容")
+    Attribute(ReplyTime, "回复时间")
+    Foreign(DiscussionID) references Discussion(DiscussionID)
+    Foreign(KSID) references KaoSheng(KSID)
+    }
+
+    Entity(LearningMaterial, "学习资料") {
+    Primary(MaterialID)
+    Attribute(MaterialName, "资料名称")
+    Attribute(MaterialType, "资料类型")
+    Attribute(MaterialContent, "资料内容")
+    Attribute(MaterialTime, "上传时间")
+    Foreign(TID) references Teacher(TID)
+    }
+
+@enduml
